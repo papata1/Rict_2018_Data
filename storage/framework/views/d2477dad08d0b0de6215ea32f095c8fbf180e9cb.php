@@ -45,17 +45,17 @@ xmlns="http://www.w3.org/1999/html">
 <meta content="" name="author" />
 <!-- end: META -->
 <!-- start: MAIN CSS -->
-<link rel="stylesheet" href="{{ URL::asset('css/theme/plugins/bootstrap/css/bootstrap.min.css') }}" >
-<link rel="stylesheet" href="{{ URL::asset('css/theme/plugins/font-awesome/css/font-awesome.min.css') }}" >
-<link rel="stylesheet" href="{{ URL::asset('css/theme/fonts/style.css') }}" >
-<link rel="stylesheet" href="{{ URL::asset('css/theme/css/main.css') }}" >
-<link rel="stylesheet" href="{{ URL::asset('css/theme/css/main-responsive.css') }}" >
-<link rel="stylesheet" href="{{ URL::asset('css/theme/plugins/iCheck/skins/all.css') }}" >
-<link rel="stylesheet" href="{{ URL::asset('css/theme/plugins/bootstrap-colorpalette/css/bootstrap-colorpalette.css') }}" >
-<link rel="stylesheet" href="{{ URL::asset('css/theme/plugins/perfect-scrollbar/src/perfect-scrollbar.css') }}" >
-<link rel="stylesheet" href="{{ URL::asset('css/theme/css/theme_light.css') }}" >
-<link rel="stylesheet" href="{{ URL::asset('css/theme/css/print.css') }}" >
-   <link rel="shortcut icon" href="{{ URL::asset('images/kmutnb.ico') }}" />
+<link rel="stylesheet" href="<?php echo e(URL::asset('css/theme/plugins/bootstrap/css/bootstrap.min.css')); ?>" >
+<link rel="stylesheet" href="<?php echo e(URL::asset('css/theme/plugins/font-awesome/css/font-awesome.min.css')); ?>" >
+<link rel="stylesheet" href="<?php echo e(URL::asset('css/theme/fonts/style.css')); ?>" >
+<link rel="stylesheet" href="<?php echo e(URL::asset('css/theme/css/main.css')); ?>" >
+<link rel="stylesheet" href="<?php echo e(URL::asset('css/theme/css/main-responsive.css')); ?>" >
+<link rel="stylesheet" href="<?php echo e(URL::asset('css/theme/plugins/iCheck/skins/all.css')); ?>" >
+<link rel="stylesheet" href="<?php echo e(URL::asset('css/theme/plugins/bootstrap-colorpalette/css/bootstrap-colorpalette.css')); ?>" >
+<link rel="stylesheet" href="<?php echo e(URL::asset('css/theme/plugins/perfect-scrollbar/src/perfect-scrollbar.css')); ?>" >
+<link rel="stylesheet" href="<?php echo e(URL::asset('css/theme/css/theme_light.css')); ?>" >
+<link rel="stylesheet" href="<?php echo e(URL::asset('css/theme/css/print.css')); ?>" >
+   <link rel="shortcut icon" href="<?php echo e(URL::asset('images/kmutnb.ico')); ?>" />
 
    <!--[if IE 7]>
    <link rel="stylesheet" href="assets/plugins/font-awesome/css/font-awesome-ie7.min.css">
@@ -69,10 +69,10 @@ xmlns="http://www.w3.org/1999/html">
 <body>
    <div class="page-container container">
 	   <div class="form-group">
-		   <center>{!! Html::image('images\banner3.jpg') !!}</center>
+		   <center><?php echo Html::image('images\banner3.jpg'); ?></center>
 	   </div>
 	   <div style="text-align:center">
-		   @include('front.topnav')
+		   <?php echo $__env->make('front.topnav', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 	   </div> 
 	   <!-- start: MAIN CONTAINER -->
 	   <div class="main-container">
@@ -97,69 +97,78 @@ xmlns="http://www.w3.org/1999/html">
 								   <table class="table table-striped table-bordered table-hover table-full-width" id="sample_1">
 									   <tr><td width="200">กระบวนการระดับที่ </td><td><?php echo $lv ?></td></tr>
 									   <tr><td>
-									   @if($lv == 1)
+									   <?php if($lv == 1): ?>
 									   ประเภท
-									   @elseif($lv == 2)
+									   <?php elseif($lv == 2): ?>
 									   ประเภทงาน
-									   @else
+									   <?php else: ?>
 									   ชื่อกระบวนการ
-									   @endif
+									   <?php endif; ?>
 									   </td><td>
-									   @if($lv == 1)
-									   {{ $model-> n1}}
-									   @elseif($lv == 2)
-									   {{ $model-> n2}}
-									   @else
-									  {{ $model-> n3}}
-									   @endif	
+									   <?php if($lv == 1): ?>
+									   <?php echo e($model-> n1); ?>
+
+									   <?php elseif($lv == 2): ?>
+									   <?php echo e($model-> n2); ?>
+
+									   <?php else: ?>
+									  <?php echo e($model-> n3); ?>
+
+									   <?php endif; ?>	
 									   </td></tr>
 									   <tr><td>ตัวย่อ</td><td>
-									   @if($lv == 1)
-									   {{ $model-> s1}}
-									   @elseif($lv == 2)
-									   {{ $model-> s1}}{{ $model-> s2}}
-									   @else
-									   {{ $model-> s1}}{{ $model-> s2}}{{ $model-> s3}}
-									   @endif
+									   <?php if($lv == 1): ?>
+									   <?php echo e($model-> s1); ?>
+
+									   <?php elseif($lv == 2): ?>
+									   <?php echo e($model-> s1); ?><?php echo e($model-> s2); ?>
+
+									   <?php else: ?>
+									   <?php echo e($model-> s1); ?><?php echo e($model-> s2); ?><?php echo e($model-> s3); ?>
+
+									   <?php endif; ?>
 									   </td></tr>
 
 									   
 									   <tr><td>
-									   @if($lv == 1)
+									   <?php if($lv == 1): ?>
 									   ประเภทงาน
-									   @else
+									   <?php else: ?>
 									   กระบวนการที่เกี่ยวข้อง
-									   @endif
+									   <?php endif; ?>
 									   
 									   </td><td>
 									   
 									
-									   @foreach($model1 as $model)
+									   <?php $__currentLoopData = $model1; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $model): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
 										
 											
-										@if($lv== 1)
+										<?php if($lv== 1): ?>
 										<a href="<?php echo url('main/lv/2/'. $model->id2 ); ?>">
-										- {{ $model-> n2}}</a><br>
+										- <?php echo e($model-> n2); ?></a><br>
 											
-										@elseif($lv== 2)
+										<?php elseif($lv== 2): ?>
 										<a href="<?php echo url('main/lv/3/'. $model->id3 ); ?>">
-										- {{ $model-> n3}}</a><br>
-										@elseif($lv== 3)
+										- <?php echo e($model-> n3); ?></a><br>
+										<?php elseif($lv== 3): ?>
 										<a href="<?php echo url('main/BusDetail/'. $model->iden ); ?>">
-										- {{ $model-> n}}</a><br>
-										@endif	
+										- <?php echo e($model-> n); ?></a><br>
+										<?php endif; ?>	
 
-										@endforeach
+										<?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
 											</td></tr>
 
 									   <tr><td>รายละเอียด</td><td>
-									   @if($lv == 1)
-									   {{ $model-> remark1}}
-									   @elseif($lv == 2)
-									   {{ $model-> remark2}}
-									   @else
-									  {{ $model-> remark3}}
-									   @endif
+									   <?php if($lv == 1): ?>
+									   <?php echo e($model-> remark1); ?>
+
+									   <?php elseif($lv == 2): ?>
+									   <?php echo e($model-> remark2); ?>
+
+									   <?php else: ?>
+									  <?php echo e($model-> remark3); ?>
+
+									   <?php endif; ?>
 									   </td></tr>
 								   </table>
 								   
@@ -178,19 +187,19 @@ xmlns="http://www.w3.org/1999/html">
 			   <!-- end: MAIN CONTAINER -->
 		   </div>
 		   <!-- start: MAIN JAVASCRIPTS -->
-		   <script src="{{ URL::asset('css/theme/plugins/jQuery-lib/2.0.3/jquery.min.js') }}"></script>
+		   <script src="<?php echo e(URL::asset('css/theme/plugins/jQuery-lib/2.0.3/jquery.min.js')); ?>"></script>
 		   <!--<![endif]-->
-		   <script src="{{ URL::asset('css/theme/plugins/jquery-ui/jquery-ui-1.10.2.custom.min.js') }}"></script>
-		   <script src="{{ URL::asset('css/theme/plugins/bootstrap/js/bootstrap.min.js') }}"></script>
-		   <script src="{{ URL::asset('css/theme/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js') }}"></script>
-		   <script src="{{ URL::asset('css/theme/plugins/blockUI/jquery.blockUI.js') }}"></script>
-		   <script src="{{ URL::asset('css/theme/plugins/iCheck/jquery.icheck.min.js') }}"></script>
-		   <script src="{{ URL::asset('css/theme/plugins/perfect-scrollbar/src/jquery.mousewheel.js') }}"></script>
-		   <script src="{{ URL::asset('css/theme/plugins/perfect-scrollbar/src/perfect-scrollbar.js') }}"></script>
-		   <script src="{{ URL::asset('css/theme/plugins/less/less-1.5.0.min.js') }}"></script>
-		   <script src="{{ URL::asset('css/theme/plugins/jquery-cookie/jquery.cookie.js') }}"></script>
-		   <script src="{{ URL::asset('css/theme/plugins/bootstrap-colorpalette/js/bootstrap-colorpalette.js') }}"></script>
-		   <script src="{{ URL::asset('css/theme/js/main.js') }}"></script>
+		   <script src="<?php echo e(URL::asset('css/theme/plugins/jquery-ui/jquery-ui-1.10.2.custom.min.js')); ?>"></script>
+		   <script src="<?php echo e(URL::asset('css/theme/plugins/bootstrap/js/bootstrap.min.js')); ?>"></script>
+		   <script src="<?php echo e(URL::asset('css/theme/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js')); ?>"></script>
+		   <script src="<?php echo e(URL::asset('css/theme/plugins/blockUI/jquery.blockUI.js')); ?>"></script>
+		   <script src="<?php echo e(URL::asset('css/theme/plugins/iCheck/jquery.icheck.min.js')); ?>"></script>
+		   <script src="<?php echo e(URL::asset('css/theme/plugins/perfect-scrollbar/src/jquery.mousewheel.js')); ?>"></script>
+		   <script src="<?php echo e(URL::asset('css/theme/plugins/perfect-scrollbar/src/perfect-scrollbar.js')); ?>"></script>
+		   <script src="<?php echo e(URL::asset('css/theme/plugins/less/less-1.5.0.min.js')); ?>"></script>
+		   <script src="<?php echo e(URL::asset('css/theme/plugins/jquery-cookie/jquery.cookie.js')); ?>"></script>
+		   <script src="<?php echo e(URL::asset('css/theme/plugins/bootstrap-colorpalette/js/bootstrap-colorpalette.js')); ?>"></script>
+		   <script src="<?php echo e(URL::asset('css/theme/js/main.js')); ?>"></script>
 
 		   <!-- end: MAIN JAVASCRIPTS -->
 		   <!-- start: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->

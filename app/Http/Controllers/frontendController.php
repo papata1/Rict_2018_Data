@@ -226,12 +226,27 @@ if(isset($content)){
             ->first();
 
             if ($lv == 3) {
-              $model1 = DB::table('business_layer')
-            ->leftJoin('business_layer_lv3','business_layer_lv3.lv2_id', '=', 'business_layer.lv3_id')
-            ->where('business_layer.id',$id)
-             ->select('business_layer.name as n','business_layer.id as iden'
-            ,'business_layer_lv3.id as id3','business_layer_lv3.remark as remark3','business_layer_lv3.short as s3')
-            ->get();
+            //   $model1 = DB::table('business_layer')
+            // ->leftJoin('business_layer_lv3','business_layer_lv3.lv2_id', '=', 'business_layer.lv3_id')
+            // ->where('business_layer.id',$id)
+            //  ->select('business_layer.name as n','business_layer.id as iden'
+            // ,'business_layer_lv3.id as id3','business_layer_lv3.remark as remark3','business_layer_lv3.short as s3')
+            // ->get();
+             $model1 = DB::select("
+              SELECT
+              rictlastlast.business_layer.`name` AS n,
+              rictlastlast.business_layer.id AS iden,
+              rictlastlast.business_layer.short_name,
+              rictlastlast.business_layer_lv3.id AS id3,
+              rictlastlast.business_layer_lv3.remark AS remark3,
+              rictlastlast.business_layer_lv3.short AS short3
+              FROM
+              rictlastlast.business_layer_lv3
+              JOIN rictlastlast.business_layer
+              ON rictlastlast.business_layer_lv3.id = rictlastlast.business_layer.lv3_id
+              WHERE
+              rictlastlast.business_layer_lv3.id = ".$id."
+              "); 
             //ddd($model1);
             }elseif ($lv == 2) {
              $model1 = DB::table('business_layer_lv3')
